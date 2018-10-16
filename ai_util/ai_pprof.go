@@ -1,4 +1,4 @@
-package rta_util
+package ai_util
 
 import (
 	"fmt"
