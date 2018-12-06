@@ -52,3 +52,10 @@ func GetRandomString(length int) string{
 	return string(result)
 }
 
+func SubStr(str string, length int) string {
+	if len(str) > length {
+		strRune := []rune(str)
+		return string(strRune[0:length])
+	}
+	return str
+}
