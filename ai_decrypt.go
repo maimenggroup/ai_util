@@ -5,7 +5,6 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/binary"
-	"strings"
 )
 
 /** ServerId subfield offset in the initialization vector. */
@@ -39,12 +38,8 @@ func DecodingPrice(kB64EncodedValue string, encryptionKey, integrityKey []byte) 
 		kB64EncodedValue += "=="
 	}
 
-	//替换字符串中的特殊字符
-	kB64EncodedValue = strings.Replace(kB64EncodedValue, "-", "/", -1)
-	kB64EncodedValue = strings.Replace(kB64EncodedValue, "_", "/", -1)
-
 	// Step 1. find the length of initialization vector and clear text.
-	encryptedValue, _ := base64.StdEncoding.DecodeString(kB64EncodedValue)
+	encryptedValue, _ := base64.URLEncoding.DecodeString(kB64EncodedValue)
 	if len(encryptedValue) != kEncryptedValueSize {
 		return false, 0
 	}
