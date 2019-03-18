@@ -10,13 +10,15 @@ import (
 type AIRoute struct {
 	address string
 	engine  *gin.Engine
+	idleTimeout time.Duration
 	server  *http.Server
 }
 
-func (r *AIRoute) Init(address string) error {
+func (r *AIRoute) Init(address string, timeout int64) error {
 	r.address = address
 	r.engine = gin.New()
 	r.engine.Use(gin.Recovery())
+	r.idleTimeout = time.Duration(timeout) * time.Millisecond
 	return nil
 }
 
@@ -33,6 +35,7 @@ func (r *AIRoute) Run() error {
 	r.server = &http.Server{
 		Addr:    r.address,
 		Handler: r.engine,
+		IdleTimeout: r.idleTimeout,
 	}
 	if err := r.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		return err

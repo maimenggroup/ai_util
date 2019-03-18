@@ -3,14 +3,14 @@ package ai_util
 import (
 	"errors"
 	"fmt"
+	"github.com/cihub/seelog"
+	"math/rand"
 	"os"
 	"os/signal"
 	"path/filepath"
 	"strings"
 	"syscall"
-	"github.com/cihub/seelog"
 	"time"
-	"math/rand"
 )
 
 func WaitSignalToStop() {
@@ -41,7 +41,7 @@ func IsFileExist(filename string) bool {
 	return exist
 }
 
-func GetRandomString(length int) string{
+func GetRandomString(length int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	bytes := []byte(str)
 	result := []byte{}

@@ -1,8 +1,8 @@
 package ai_util
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestParseConfigPath(t *testing.T) {
